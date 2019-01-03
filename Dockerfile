@@ -1,5 +1,5 @@
 FROM debian:stretch
-MAINTAINER Oliver Fesseler <oliver@fesseler.info>
+MAINTAINER ganmao <zdl0812@163.com>
 
 EXPOSE 9189
 EXPOSE 24007
@@ -20,11 +20,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install glusterfs-server
 # Clean
 RUN apt-get clean
 
-
 # Create gluster volume, start gluster service and gluster_exporter
-RUN mkdir -p /data
-RUN mkdir -p /mnt/data
-RUN mkdir -p /mnt/gv_test
+RUN mkdir -p /data &&\
+    mkdir -p /mnt/data &&\
+    mkdir -p /mnt/gv_test
 
 COPY gluster-init.sh /usr/bin/gluster-init.sh
 RUN chmod a+x /usr/bin/gluster-init.sh
@@ -32,8 +31,8 @@ RUN chmod a+x /usr/bin/gluster-init.sh
 # Copy gluster_exporter
 # COPY gluster_exporter /usr/bin/gluster_exporter
 ADD https://github.com/ofesseler/gluster_exporter/releases/download/v0.2.7/gluster_exporter-0.2.7.linux-amd64.tar.gz /tmp/
-RUN tar -xzf /tmp/gluster_exporter-0.2.7.linux-amd64.tar.gz -C /tmp
-RUN cp /tmp/gluster_exporter-0.2.7.linux-amd64/gluster_exporter /usr/bin/gluster_exporter
+RUN tar -xzf /tmp/gluster_exporter-0.2.7.linux-amd64.tar.gz -C /tmp &&\
+    cp /tmp/gluster_exporter-0.2.7.linux-amd64/gluster_exporter /usr/bin/gluster_exporter
 
 #RUN /usr/bin/gluster-init.sh
 ENTRYPOINT /usr/bin/gluster-init.sh
