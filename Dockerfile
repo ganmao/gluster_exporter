@@ -12,13 +12,10 @@ RUN apt-key add /tmp/rsa.pub && rm -f /tmp/rsa.pub
 
 # Add gluster debian repo and update apt
 RUN echo deb [arch=amd64] https://download.gluster.org/pub/gluster/glusterfs/4.0/LATEST/Debian/stretch/amd64/apt stretch main > /etc/apt/sources.list.d/gluster.list
-RUN apt-get update
-
-# Install Gluster server
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install glusterfs-server
-
-# Clean
-RUN apt-get clean
+RUN apt-get update &&\
+    # Install Gluster server
+    DEBIAN_FRONTEND=noninteractive apt-get -y install glusterfs-server &&\
+    apt-get clean
 
 # Create gluster volume, start gluster service and gluster_exporter
 RUN mkdir -p /data &&\
