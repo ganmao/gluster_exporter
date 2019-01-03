@@ -11,7 +11,7 @@ ADD https://download.gluster.org/pub/gluster/glusterfs/4.0/rsa.pub /tmp
 RUN apt-key add /tmp/rsa.pub && rm -f /tmp/rsa.pub
 
 # Add gluster debian repo and update apt
-RUN echo deb https://download.gluster.org/pub/gluster/glusterfs/4.0/4.0.2/Debian/9/amd64/apt/ stretch main > /etc/apt/sources.list.d/gluster.list
+RUN echo deb https://download.gluster.org/pub/gluster/glusterfs/4.0/4.0.2/Debian/stretch/amd64/apt/ stretch main > /etc/apt/sources.list.d/gluster.list
 RUN apt-get update
 
 # Install Gluster server
