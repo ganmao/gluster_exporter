@@ -32,7 +32,7 @@ RUN chmod a+x /usr/bin/gluster-init.sh
 # Copy gluster_exporter
 # COPY gluster_exporter /usr/bin/gluster_exporter
 ADD https://github.com/ofesseler/gluster_exporter/releases/download/v0.2.7/gluster_exporter-0.2.7.linux-amd64.tar.gz /tmp/
-RUN tar -xzf -C /tmp/ /tmp/gluster_exporter-0.2.7.linux-amd64.tar.gz
+RUN tar -xzf /tmp/gluster_exporter-0.2.7.linux-amd64.tar.gz -C /tmp
 COPY /tmp/gluster_exporter-0.2.7.linux-amd64/gluster_exporter /usr/bin/gluster_exporter
 
 #RUN /usr/bin/gluster-init.sh
